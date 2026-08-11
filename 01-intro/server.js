@@ -4,6 +4,13 @@ let requestsCount = 0;
 
 // create server with params request, response
 const server = http.createServer((request, response) => {
+    console.log(request.method, request.url);
+    if (request.url === '/favicon.ico' || request.url.startsWith('/.well-known/')) {
+        response.writeHead(204);
+        response.end();
+        return;
+    }
+
     requestsCount++;
 
     // react to these url
